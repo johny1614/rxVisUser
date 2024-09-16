@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {greet} from "rx-vis-lib-new";
+import {extensionReadyForMessages$, greet} from "rx-vis-lib-new";
 
 @Component({
   selector: 'app-root',
@@ -13,6 +13,9 @@ export class AppComponent {
   title = 'rxUser';
 
   constructor() {
+    setTimeout(() => {
+      extensionReadyForMessages$.next(true);
+    },4000)
   }
 
   makeGreet(){
