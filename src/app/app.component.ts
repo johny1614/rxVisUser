@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import {greet} from "rx-vis-lib-new";
 
 @Component({
   selector: 'app-root',
@@ -10,4 +11,11 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'rxUser';
+
+  constructor() {
+  }
+
+  makeGreet(){
+    return greet('World xdd');
+  }
 }
