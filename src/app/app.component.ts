@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import {extensionReadyForMessages$, greet, initRxVision} from "rx-vis-lib-new";
-import {addRxVisionEmission} from "rx-vis-lib-new/src";
+import {Component} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
+import {addRxVisionEmission, initRxVision} from "rx-vis-lib-new";
+
 
 @Component({
   selector: 'app-root',
@@ -11,17 +11,27 @@ import {addRxVisionEmission} from "rx-vis-lib-new/src";
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'rxUser';
+  title = 'rxUserr';
+
+  randomNumber = Math.floor(Math.random() * 100);
 
   constructor() {
-    initRxVision(['stream1', 'stream2']);
-    setTimeout(() => {
-      addRxVisionEmission('stream1', 'value1');
-      extensionReadyForMessages$.next(true);
-    },4000)
-  }
 
-  makeGreet(){
-    return greet('World xdd');
+    setTimeout(() => {
+      initRxVision(['stream1', 'stream2'], window);
+    }, 1000);
+
+    setTimeout(() => {
+      addRxVisionEmission('stream1', this.randomNumber);
+    }, 2000)
+
+    setTimeout(() => {
+      addRxVisionEmission('stream1', 'value2');
+    }, 3000)
+
+    setTimeout(() => {
+      addRxVisionEmission('stream2', 'xd');
+    }, 4000)
+
   }
 }
