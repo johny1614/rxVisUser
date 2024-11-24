@@ -1,8 +1,9 @@
-import {map, Subject} from "rxjs";
+import { map, Subject, tap } from "rxjs";
+import { addRxVisionEmission } from "rx-vis-lib-new";
 
 export class Test1 {
 
-    x$:Subject<number> = new Subject();
+    x$: Subject<number> = new Subject();
     y$: Subject<number> = new Subject();
 
     constructor() {
@@ -10,13 +11,18 @@ export class Test1 {
     }
 
     observeX() {
-        this.x$.subscribe((x) => {
+        this.x$.pipe(
+            tap(() => addRxVisionEmission('Test1.observeX', 1))
+        ).subscribe((x) => {
             console.log('x', x);
         });
     }
 
     observeY() {
-        this.y$.pipe(map(y => y * 2)).subscribe((y) => {
+        this.y$.pipe(
+            map(y => y * 2),
+            tap(() => addRxVisionEmission('Test1.observeY', 1))
+        ).subscribe((y) => {
             console.log('jest i y', y);
         });
     }
